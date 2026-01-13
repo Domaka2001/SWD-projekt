@@ -1,0 +1,6 @@
+.venv/
+pysmile_license.py
+GEMINI.md
+.DS_Store
+.idea/
+__pycache__/
