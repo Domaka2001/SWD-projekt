@@ -1,22 +1,46 @@
 """
 utilities.py
 
-Definicja funkcji użyteczności zgodna z API PySMILE.
+Definiuje ostateczną funkcję użyteczności dla sieci.
 """
+from . import variables
 
-def set_utility(net):
-    node = "Użyteczność"
+def set_utility_table(net):
+    """
+    Defines the utility table for the final UTILITY node based on the states
+    of its parent criteria nodes (TIME, COST, COMFORT).
+    """
 
-    # SMILE mówi, ile wartości potrzeba
-    required_size = len(net.get_node_definition(node))
+    # 1. Define base utility scores for each state of the criteria.
+    time_scores = { "Krótki": 100, "Średni": 50, "Długi": 0 }
+    cost_scores = { "Niski": 100, "Średni": 50, "Wysoki": 0 }
+    comfort_scores = { "Wysoki": 100, "Średni": 50, "Niski": 0 }
 
-    # Bazowa skala użyteczności (neutralna, rosnąca)
-    base_utility = [0, 25, 50, 75, 100]
+    # 2. Get the states in the order SMILE expects them.
+    # The order of parents is determined by add_arc calls in structure.py.
+    # The table is a flattened array where the last parent's outcomes vary fastest.
+    # Assumed parent order for UTILITY node: TIME, COST, COMFORT
+    # Therefore, the CPT changes fastest for COMFORT, then COST, then TIME.
+    
+    time_states = net.get_outcome_ids(variables.TIME)
+    cost_states = net.get_outcome_ids(variables.COST)
+    comfort_states = net.get_outcome_ids(variables.COMFORT)
 
-    utility = []
-    i = 0
-    while len(utility) < required_size:
-        utility.append(base_utility[i % len(base_utility)])
-        i += 1
-
-    net.set_node_definition(node, utility)
+    utility_table = []
+    
+    # Iterate through all combinations in the correct order to build the flattened array.
+    for time_state in time_states:
+        for cost_state in cost_states:
+            for comfort_state in comfort_states:
+                # Additive utility function: U(A,B,C) = U(A) + U(B) + U(C)
+                total_utility = (
+                    time_scores.get(time_state, 0) +
+                    cost_scores.get(cost_state, 0) +
+                    comfort_scores.get(comfort_state, 0)
+                )
+                utility_table.append(total_utility)
+    
+    # The utility table should have 3 * 3 * 3 = 27 entries.
+    net.set_node_definition(variables.UTILITY, utility_table)
+    
+    print("Final utility table defined on UTILITY node.")

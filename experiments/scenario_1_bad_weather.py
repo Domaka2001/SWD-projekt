@@ -1,16 +1,21 @@
 """
 Scenariusz 1:
-Zła pogoda i wysokie natężenie ruchu.
+Zła pogoda.
 """
-
 from src.inference.decision_engine import solve_decision
-if __name__ == "__main__":
-    evidence = {
-        "Czas_podróży": "Długi"
-    }
+from src.model.variables import WEATHER
 
+def scenario_bad_weather():
+    print("--- SCENARIUSZ: ZŁA POGODA ---")
+    
+    evidence = {
+        WEATHER: "Zła"
+    }
+    
     decision, eu = solve_decision(evidence)
 
-    print("Rekomendowana decyzja:", decision)
-    print("Oczekiwana użyteczność:", eu)
+    print(f"\nNajlepsza decyzja w warunkach złej pogody: {decision}")
+    print(f"Oczekiwana użyteczność: {eu:.2f}")
 
+if __name__ == "__main__":
+    scenario_bad_weather()
