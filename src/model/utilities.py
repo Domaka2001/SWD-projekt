@@ -5,11 +5,17 @@ Definiuje ostateczną funkcję użyteczności dla sieci.
 """
 from . import variables
 
-def set_utility_table(net):
+def set_utility_table(net, weights=None):
     """
     Defines the utility table for the final UTILITY node based on the states
-    of its parent criteria nodes (TIME, COST, COMFORT).
+    of its parent criteria nodes (TIME, COST, COMFORT) and user-provided weights.
     """
+    if weights is None:
+        weights = {
+            variables.TIME: 1.0,
+            variables.COST: 1.0,
+            variables.COMFORT: 1.0
+        }
 
     # 1. Define base utility scores for each state of the criteria.
     time_scores = { "Krótki": 100, "Średni": 50, "Długi": 0 }
@@ -32,11 +38,11 @@ def set_utility_table(net):
     for time_state in time_states:
         for cost_state in cost_states:
             for comfort_state in comfort_states:
-                # Additive utility function: U(A,B,C) = U(A) + U(B) + U(C)
+                # Weighted additive utility function
                 total_utility = (
-                    time_scores.get(time_state, 0) +
-                    cost_scores.get(cost_state, 0) +
-                    comfort_scores.get(comfort_state, 0)
+                    time_scores.get(time_state, 0) * weights.get(variables.TIME, 1.0) +
+                    cost_scores.get(cost_state, 0) * weights.get(variables.COST, 1.0) +
+                    comfort_scores.get(comfort_state, 0) * weights.get(variables.COMFORT, 1.0)
                 )
                 utility_table.append(total_utility)
     

@@ -32,7 +32,7 @@ def create_node_with_outcomes(net, node_type, node_id, outcomes):
             
     return handle
 
-def build_decision_network():
+def build_decision_network(weights=None):
     net = pysmile.Network()
     print("Building network (method from documentation)...")
 
@@ -59,7 +59,7 @@ def build_decision_network():
     print("Probabilities set.")
 
     # 4. Set Utilities
-    set_utility_table(net)
+    set_utility_table(net, weights)
     print("Utilities set.")
 
     print("Decision network built successfully.")

@@ -12,7 +12,7 @@ def scenario_bad_weather():
         WEATHER: "Zła"
     }
     
-    decision, eu = solve_decision(evidence)
+    decision, eu, _ = solve_decision(evidence)
 
     print(f"\nNajlepsza decyzja w warunkach złej pogody: {decision}")
     print(f"Oczekiwana użyteczność: {eu:.2f}")

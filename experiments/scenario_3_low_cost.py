@@ -12,7 +12,7 @@ def scenario_no_observations():
     # System podejmie decyzję bazując tylko na rozkładach a priori.
     evidence = {} 
     
-    decision, eu = solve_decision(evidence)
+    decision, eu, _ = solve_decision(evidence)
 
     print(f"\nNajlepsza decyzja (bez obserwacji): {decision}")
     print(f"Oczekiwana użyteczność: {eu:.2f}")

@@ -13,7 +13,7 @@ def scenario_good_weather_low_traffic():
         TRAFFIC: "Niskie"
     }
     
-    decision, eu = solve_decision(evidence)
+    decision, eu, _ = solve_decision(evidence)
 
     print(f"\nNajlepsza decyzja: {decision}")
     print(f"Oczekiwana użyteczność: {eu:.2f}")
