@@ -30,14 +30,65 @@ InteligentnyAsystentDojazdu/
 ---
 
 ## Technologie
+
 - Python 3.10+
+
 - PySMILE (SMILE)
+
+- Streamlit (Interfejs użytkownika)
+
+- Pandas / Matplotlib (Wizualizacja danych)
+
 - GeNIe Modeler (opcjonalnie, GUI)
+
+
 
 ---
 
-## Uruchomienie przykładowego scenariusza
+
+
+## Uruchomienie
+
+
+
+### 1. Instalacja bibliotek
+
+Wymagana jest instalacja biblioteki PySMILE z serwera producenta oraz pozostałych zależności:
+
+
 
 ```bash
- python -m pip install --index-url https://support.bayesfusion.com/pysmile-A/ pysmile
+
+pip install --index-url https://support.bayesfusion.com/pysmile-A/ pysmile
+
+pip install streamlit pandas matplotlib
+
+```
+
+
+
+### 2. Aplikacja Interaktywna (Streamlit)
+
+Najwygodniejszym sposobem korzystania z systemu jest aplikacja webowa:
+
+
+
+```bash
+
+streamlit run app.py
+
+```
+
+
+
+### 3. Scenariusze testowe (CLI)
+
+Możesz również uruchomić gotowe scenariusze eksperymentalne:
+
+
+
+```bash
+
 python -m experiments.scenario_1_bad_weather
+
+```
