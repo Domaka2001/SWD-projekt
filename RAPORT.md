@@ -1,15 +1,21 @@
 # Raport Projektu: Inteligentny Asystent Dojazdu
 ### System Wspomagania Decyzji (SWD)
 
-*Autorzy: Dominik Bojkiewicz, Dominik Jaroszuk, Dominika Kamińska*
-*Data: 19 stycznia 2026*
+* *Autorzy: Dominik Bojkiewicz, Dominik Jaroszuk, Dominika Kamińska*
+* *Data: 21 stycznia 2026*
+* *Repozytorium: [Link do repozytorium GitHub](https://github.com/Domaka2001/SWD-projekt.git)*
 
 ## 1. Wstęp i Cel Projektu
 Celem projektu było zaprojektowanie i implementacja Systemu Wspomagania Decyzji (SWD), którego zadaniem jest optymalizacja codziennego wyboru środka transportu. System rozwiązuje klasyczny problem teorii decyzji: wybór jednej z wielu alternatyw w środowisku dynamicznym, charakteryzującym się niepewnością informacji oraz subiektywnymi preferencjami użytkownika.
 
 ## 2. Fundamenty Teoretyczne
-### 2.1 Diagramy Wpływu i Typologia Węzłów
-System został sformalizowany jako **Diagram Wpływu**, będący acyklicznym grafem skierowanym (DAG). Struktura sieci składa się z 8 węzłów, z których każdy pełni określoną rolę w procesie modelowania decyzji:
+### 2.1 Diagramy Wpływu 
+System został sformalizowany jako **Diagram Wpływu**, będący acyklicznym grafem skierowanym (DAG).
+
+#### Wizualizacja struktury modelu (GeNIe)
+![Struktura sieci w GeNIe](docs/model_screenshot.png)
+
+Struktura sieci składa się z 8 węzłów, z których każdy pełni określoną rolę w procesie modelowania decyzji:
 
 **A. Węzły losowe (Chance nodes) – modelowanie niepewności:**
 *   **Pogoda (Weather):** Węzeł bazowy (root), określający stany: "Dobra", "Zła". Wpływa bezpośrednio na natężenie ruchu oraz subiektywny komfort podróży.
